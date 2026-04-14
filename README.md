@@ -10,6 +10,8 @@ Create a new folder inside `assignments/` using a short, descriptive, kebab-case
 
 Copy `templates/assignment-template.md` into your new folder as `README.md` and fill in all sections:
 
+> ⚠️ **Important:** Keep section headers **exactly** as they appear in the template, including emoji icons. Do **not** translate or modify the headings.
+
 | Section | Description |
 |---|---|
 | `# 📘 Assignment: [Title]` | Short, descriptive assignment title |
