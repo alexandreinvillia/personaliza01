@@ -425,7 +425,84 @@ body {
   opacity: 1;
 }
 
-/* Responsive Design */
+/* Filters */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.filters label {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.filters select,
+.filters input[type="text"] {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  background: white;
+}
+
+.filters select:focus,
+.filters input[type="text"]:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+.btn-clear {
+  background-color: #6c757d;
+  color: white;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-clear:hover {
+  background-color: #5a6268;
+}
+
+/* Level Badges */
+.level-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.level-beginner {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.level-intermediate {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.level-advanced {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Tag Badges */
+.tag-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+
 @media (max-width: 768px) {
   .header h1 {
     font-size: 2rem;

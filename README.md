@@ -1,3 +1,60 @@
+## 📚 How to Add a New Assignment
+
+Follow these steps to add a new assignment to the portal:
+
+### 1. Create the Assignment Folder
+
+Create a new folder inside `assignments/` using a short, descriptive, kebab-case name (e.g., `assignments/loops-and-conditionals`).
+
+### 2. Write the README.md
+
+Copy `templates/assignment-template.md` into your new folder as `README.md` and fill in all sections:
+
+| Section | Description |
+|---|---|
+| `# 📘 Assignment: [Title]` | Short, descriptive assignment title |
+| `## 🎯 Objective` | 1–2 sentences summarizing learning goals |
+| `## 📊 Level` | One of: **Beginner**, **Intermediate**, or **Advanced** |
+| `## ✅ Prerequisites` | Concepts/skills required before starting |
+| `## 📝 Tasks` | Individual tasks with descriptions and requirements |
+| `## 📦 Delivery Criteria` | Checklist of what will be evaluated |
+| `## 💡 Tips` | Hints and links to help students |
+
+### 3. Add Starter Files (Optional)
+
+Place any starter code or data files in the same folder (e.g., `starter-code.py`, `data.csv`).
+
+### 4. Register the Assignment in `config.json`
+
+Add an entry to the `assignments` array in `config.json`:
+
+```json
+{
+  "id": "your-assignment-id",
+  "title": "Your Assignment Title",
+  "description": "Short description shown in the assignment list.",
+  "path": "assignments/your-assignment-id",
+  "level": "Beginner",
+  "tags": ["python", "loops"],
+  "dueDate": "YYYY-MM-DD",
+  "attachments": [
+    {
+      "name": "Starter Code",
+      "file": "starter-code.py",
+      "type": "python"
+    }
+  ]
+}
+```
+
+> **Fields:** `id`, `title`, `description`, and `path` are required. `level`, `tags`, `dueDate`, and `attachments` are optional but recommended.
+
+### 5. Verify
+
+Open `index.html` in a browser (via a local server) to confirm the new assignment appears in the list and the detail page loads correctly.
+
+---
+
 <div align="center">
 
 # 🎉 Congratulations alexandreinvillia! 🎉

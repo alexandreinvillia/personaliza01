@@ -10,6 +10,8 @@
       "title": "Python Basics",
       "description": "Variables, data types, conditionals, and loops",
       "path": "assignments/python-basics",
+      "level": "Beginner",
+      "tags": ["python", "variables", "conditionals", "loops"],
       "dueDate": "2026-02-20",
       "attachments": [
         {
@@ -24,6 +26,8 @@
       "title": "Games in Python",
       "description": "Creating games using Python",
       "path": "assignments/games-in-python",
+      "level": "Intermediate",
+      "tags": ["python", "games", "logic"],
       "dueDate": "2026-03-07"
     },
     {
@@ -31,6 +35,8 @@
       "title": "Python Classes",
       "description": "Defining and using classes in Python",
       "path": "assignments/python-classes",
+      "level": "Intermediate",
+      "tags": ["python", "oop", "classes"],
       "dueDate": "2026-03-17",
       "attachments": [
         {
@@ -45,6 +51,8 @@
       "title": "Data Analysis",
       "description": "Basics of data analysis: loading, exploring, and visualizing data in Python.",
       "path": "assignments/data-analysis",
+      "level": "Intermediate",
+      "tags": ["python", "data", "pandas", "visualization"],
       "dueDate": "2026-04-20",
       "attachments": [
         {
@@ -64,6 +72,8 @@
       "title": "REST APIs with FastAPI",
       "description": "Building REST endpoints with FastAPI, validation, and CRUD operations.",
       "path": "assignments/fastapi-rest-apis",
+      "level": "Advanced",
+      "tags": ["python", "fastapi", "rest", "api"],
       "dueDate": "2026-04-13",
       "attachments": [
         {

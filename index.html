@@ -35,6 +35,18 @@
         <!-- All Assignments Section -->
         <section class="assignments">
           <h2>All Assignments</h2>
+          <div class="filters">
+            <label for="filter-level">Level:</label>
+            <select id="filter-level">
+              <option value="">All</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+            <label for="filter-tag">Tag:</label>
+            <input type="text" id="filter-tag" placeholder="e.g. python, api…" />
+            <button id="filter-clear" class="btn btn-clear">Clear</button>
+          </div>
           <div id="assignments-list" class="assignments-list">
             <!-- Assignments will be loaded dynamically -->
             <div class="loading">Loading assignments...</div>

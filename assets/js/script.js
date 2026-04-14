@@ -12,6 +12,7 @@ class AssignmentPortal {
       this.renderCourseInfo();
       this.renderNextDueAssignment();
       this.renderAllAssignments();
+      this.setupFilters();
     } catch (error) {
       console.error("Failed to initialize portal:", error);
       this.showError("Failed to load course information");
@@ -41,10 +42,10 @@ class AssignmentPortal {
 
   renderCourseInfo() {
     const { course } = this.config;
-    document.getElementById("course-title").textContent = course.title;
-    document.getElementById("course-info").textContent = course.school;
-    document.getElementById("course-description").textContent = course.description;
-    document.title = `${course.school} - ${course.title}`;
+    document.getElementById("course-title").textContent = course.title || "Computer Science";
+    document.getElementById("course-info").textContent = course.school || "";
+    document.getElementById("course-description").textContent = course.description || "";
+    document.title = `${course.school || "School"} - ${course.title || "Assignments"}`;
   }
 
   renderNextDueAssignment() {
@@ -112,9 +113,13 @@ class AssignmentPortal {
       day: 'numeric'
     });
 
+    const levelBadge = assignment.level
+      ? `<span class="level-badge level-${assignment.level.toLowerCase()}">${assignment.level}</span>`
+      : '';
+
     return `
-      <h3>${assignment.title}</h3>
-      <p>${assignment.description}</p>
+      <h3>${assignment.title || 'Untitled Assignment'} ${levelBadge}</h3>
+      <p>${assignment.description || 'No description available.'}</p>
       <div class="next-due-meta">
         <div class="next-due-date">📅 Due: ${formattedDate}</div>
         <div class="next-due-urgency ${urgencyClass}">⏰ ${urgencyText}</div>
@@ -127,7 +132,7 @@ class AssignmentPortal {
     `;
   }
 
-  renderAllAssignments() {
+  renderAllAssignments(filterLevel = '', filterTag = '') {
     const assignmentsList = document.getElementById("assignments-list");
     const { assignments } = this.config;
 
@@ -136,8 +141,21 @@ class AssignmentPortal {
       return;
     }
 
+    // Apply filters
+    let filtered = assignments.filter(a => {
+      const levelMatch = !filterLevel || (a.level || '') === filterLevel;
+      const tagMatch = !filterTag ||
+        (a.tags || []).some(t => t.toLowerCase().includes(filterTag.toLowerCase()));
+      return levelMatch && tagMatch;
+    });
+
+    if (filtered.length === 0) {
+      assignmentsList.innerHTML = '<div class="loading">No assignments match the selected filters.</div>';
+      return;
+    }
+
     // Sort assignments by due date: latest due date first
-    const sortedAssignments = [...assignments].sort((a, b) => {
+    const sortedAssignments = [...filtered].sort((a, b) => {
       // If one has no due date, put it at the end
       if (!a.dueDate && !b.dueDate) return 0;
       if (!a.dueDate) return 1;
@@ -166,14 +184,24 @@ class AssignmentPortal {
 
     const dynamicStatus = this.getAssignmentStatus(assignment);
 
+    const levelBadge = assignment.level
+      ? `<span class="level-badge level-${assignment.level.toLowerCase()}">${assignment.level}</span>`
+      : '';
+
+    const tagBadges = (assignment.tags || [])
+      .map(t => `<span class="tag-badge">${t}</span>`)
+      .join('');
+
     return `
       <div class="assignment-row">
         <div class="assignment-info">
-          <h3>${assignment.title}</h3>
-          <p>${assignment.description}</p>
+          <h3>${assignment.title || 'Untitled Assignment'}</h3>
+          <p>${assignment.description || 'No description available.'}</p>
           <div class="assignment-quick-meta">
             <span class="due-date">📅 ${dueDate}</span>
             <span class="status ${dynamicStatus}">${dynamicStatus}</span>
+            ${levelBadge}
+            ${tagBadges}
           </div>
         </div>
         <div class="assignment-actions-compact">
@@ -183,6 +211,26 @@ class AssignmentPortal {
         </div>
       </div>
     `;
+  }
+
+  setupFilters() {
+    const levelSelect = document.getElementById("filter-level");
+    const tagInput = document.getElementById("filter-tag");
+    const clearBtn = document.getElementById("filter-clear");
+
+    if (!levelSelect || !tagInput || !clearBtn) return;
+
+    const applyFilters = () => {
+      this.renderAllAssignments(levelSelect.value, tagInput.value.trim());
+    };
+
+    levelSelect.addEventListener("change", applyFilters);
+    tagInput.addEventListener("input", applyFilters);
+    clearBtn.addEventListener("click", () => {
+      levelSelect.value = "";
+      tagInput.value = "";
+      applyFilters();
+    });
   }
 
   showError(message) {
